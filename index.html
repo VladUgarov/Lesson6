@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<button id="button">KEK2</button>
+
+<script>
+    button.addEventListener('click', () => {
+        Promise.resolve().then(() => console.log('Microtask 1'));
+        console.log('Listener 1');
+    });
+
+    button.addEventListener('click', () => {
+        Promise.resolve().then(() => console.log('Microtask 2'));
+        console.log('Listener 2');
+    });
+</script>
+
+</body>
+</html>
+
+
+$.on('button', 'click', function onClick() {
+    Promise.resolve().then(() => console.log('Microtask 1'));
+    console.log('Listener 1');
+});
+
+
+$.on('button', 'click', function onClick() {
+Promise.resolve().then(() => console.log('Microtask 1'));
+console.log('Listener 1');
+});

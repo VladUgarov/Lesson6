@@ -1,0 +1,14 @@
+Сначало js идет по синхронно по коду в Call Stack попадедет первая задача addEventListener(), и она сразу же попадет в Callback Queue потому что она асинхронна
+затем в Call Stack попадет вторая задача addEventListener() она тоже попадет Callback Queue по той же причине. 
+Когда закончиться синхронный код Event Loop закинет первый в очереди addEventListener() и не возьмет второй пока первая полностью не выполнится. 
+Соответсвенно первая функция вызывается идет там синхронно видит там Promis и добовляет его в микрозадачу и сначало выполняет синхронный код console.log('Listener 1')
+потом из микрозадачи достается наш промис и выполняется.
+
+Соответсвенно вывод:
+Listener 1
+Microtask 1
+Listener 2
+Microtask 2
+
+
+http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMCk7CiAgICBjb25zb2xlLmxvZygna2VrJykKfSk7Cgo%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
