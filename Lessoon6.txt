@@ -1,14 +1,17 @@
-Сначало js идет по синхронно по коду в Call Stack попадедет первая задача addEventListener(), и она сразу же попадет в Callback Queue потому что она асинхронна
-затем в Call Stack попадет вторая задача addEventListener() она тоже попадет Callback Queue по той же причине. 
-Когда закончиться синхронный код Event Loop закинет первый в очереди addEventListener() и не возьмет второй пока первая полностью не выполнится. 
-Соответсвенно первая функция вызывается идет там синхронно видит там Promis и добовляет его в микрозадачу и сначало выполняет синхронный код console.log('Listener 1')
-потом из микрозадачи достается наш промис и выполняется.
-
+1) Сначало js идет синхронно по всему коду в Call Stack попадедет первый и второй слушатель addEventListener(), Web Apis начинает их слушать  ожидает нажатие кнопки)
+Когда кнопка нажимается в Callback Queue попадают обе функции. Event Loop берет первую из очереди фунукцию добавляет в Call Stack и пока там не выполнится весь синхронный код и все микрозадачи
+вторая функция из Callback Queue не будет добавлена в Call Stack.
+Js идет синхронно по первой функции и видит Promis и добовляет его в микрозадачу, затем видит console.log('Listener 1') и так как синхронного кода больше нету выполняет данный console.log('Listener 1') потом из микрозадачи достаеться Promis и выполняется console.log('Microtask 1').
+Затем все тоже самое со второй функцией из Callback Queue
 Соответсвенно вывод:
 Listener 1
 Microtask 1
 Listener 2
 Microtask 2
 
-
-http://latentflip.com/loupe/?code=JC5vbignYnV0dG9uJywgJ2NsaWNrJywgZnVuY3Rpb24gb25DbGljaygpIHsKICAgIHNldFRpbWVvdXQoZnVuY3Rpb24gdGltZXIoKSB7CiAgICAgICAgY29uc29sZS5sb2coJ1lvdSBjbGlja2VkIHRoZSBidXR0b24hJyk7ICAgIAogICAgfSwgMCk7CiAgICBjb25zb2xlLmxvZygna2VrJykKfSk7Cgo%3D!!!PGJ1dHRvbj5DbGljayBtZSE8L2J1dHRvbj4%3D
+2) Да разница будет
+вывод:
+Listener 1
+Listener 2
+Microtask 1
+Microtask 2
